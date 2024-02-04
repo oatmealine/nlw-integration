@@ -5,7 +5,7 @@
 		"mac": "2.200",
 		"android": "2.205"
 	},
-	"version": "v1.1.1",
+	"version": "v1.1.2",
 	"id": "oatmealine.nlw_integration",
 	"name": "NLW Integration",
 	"dependencies": [
