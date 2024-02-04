@@ -17,6 +17,7 @@ class ListManager {
 		static void init();
 		static std::optional<NLWRating> getRating(GJGameLevel*);
 		static cocos2d::ccColor3B getTierColor(std::string tier);
+		static cocos2d::ccColor3B getEnjoymentColor(float enjoyment);
 		static std::string getRatingLink(NLWRating rating);
 };
 

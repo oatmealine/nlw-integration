@@ -12,5 +12,12 @@
 		}
 	],
 	"developer": "oatmealine",
-	"description": "Integrates the Non-Listworthy Extreme Demon spreadsheet into level pages"
+	"description": "Integrates the Non-Listworthy Extreme Demon spreadsheet into level pages",
+	"resources": {
+		"spritesheets": {
+			"NLW_icons": [
+				"resources/*.png"
+			]
+		}
+	}
 }

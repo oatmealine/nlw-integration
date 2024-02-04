@@ -1,6 +1,7 @@
 #include "ListManager.h"
 #include "Geode/loader/Log.hpp"
 #include "NLWRating.h"
+#include "ccTypes.h"
 #include <Geode/utils/web.hpp>
 #include <matjson.hpp>
 #include <string>
@@ -90,6 +91,15 @@ cocos2d::ccColor3B ListManager::getTierColor(std::string tier) {
 	if (tier == "New Rates")          return cocos2d::ccColor3B(255, 255, 255);
 	if (tier == "Potential Extremes") return cocos2d::ccColor3B(235, 235, 235);
 
+	return cocos2d::ccColor3B(255, 255, 255);
+}
+
+cocos2d::ccColor3B ListManager::getEnjoymentColor(float enjoyment) {
+	if (enjoyment > 90.f) return cocos2d::ccColor3B(0,   255, 254);
+	if (enjoyment > 75.f) return cocos2d::ccColor3B(179, 215, 170);
+	if (enjoyment > 60.f) return cocos2d::ccColor3B(255, 229, 159);
+	if (enjoyment > 40.f) return cocos2d::ccColor3B(254, 203, 160);
+	if (enjoyment >  0.f) return cocos2d::ccColor3B(240, 153, 154);
 	return cocos2d::ccColor3B(255, 255, 255);
 }
 
