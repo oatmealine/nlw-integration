@@ -1,6 +1,7 @@
 #include "NLWInfoPopupLayer.h"
 #include "Geode/binding/GJGameLevel.hpp"
 #include "Geode/loader/Log.hpp"
+#include "Geode/ui/MDTextArea.hpp"
 #include "Geode/ui/TextArea.hpp"
 #include "Geode/cocos/cocoa/CCGeometry.h"
 #include "Geode/cocos/label_nodes/CCLabelBMFont.h"
@@ -44,9 +45,9 @@ bool NLWInfoPopupLayer::setup(GJGameLevel* level, NLWRating* rating) {
 	m_mainLayer->addChild(skillset);
 
 	auto const descSize = CCSize { 380.f, 70.f };
-	auto const descPos = (winSize - descSize) / 2 - ccp(0.f, 20.f);
+	auto const descPos = winSize / 2 - ccp(0.f, 10.f);
 
-	cocos2d::extension::CCScale9Sprite* descBg = cocos2d::extension::CCScale9Sprite::create("square02b_001.png", { 0.0f, 0.0f, 80.0f, 80.0f });
+	/*cocos2d::extension::CCScale9Sprite* descBg = cocos2d::extension::CCScale9Sprite::create("square02b_001.png", { 0.0f, 0.0f, 80.0f, 80.0f });
 	descBg->setContentSize(descSize);
 	descBg->setPosition(descPos);
 	descBg->setAnchorPoint({0.f, 0.f});
@@ -64,6 +65,11 @@ bool NLWInfoPopupLayer::setup(GJGameLevel* level, NLWRating* rating) {
 
 	description->m_contentLayer->addChild(text);
 	description->m_contentLayer->setContentSize({ descSize.width, std::max(text->getHeight(), descSize.height) });
+	m_mainLayer->addChild(description);*/
+
+	auto description = MDTextArea::create(rating->description, descSize);
+	description->setPosition(descPos);
+	description->setTouchEnabled(true);
 	m_mainLayer->addChild(description);
 
 	auto openBtnSpr = ButtonSprite::create("Sheet", "goldFont.fnt", "GJ_button_01.png", .8f);
