@@ -39,7 +39,7 @@ void ListManager::init() {
 				ListManager::erroredRatings = true;
 				std::string errorStr = "\n\n<cr>Could not fetch NLW data.</c>\nThe API could be down, or this is could be a temporary network failure. Restart your game to try again!";
 				FLAlertLayer::create("Error", error + errorStr, "OK")->show();
-				log::error(error);
+				//log::error(error);
 			});
 	}
 }
