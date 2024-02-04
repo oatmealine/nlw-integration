@@ -16,6 +16,7 @@
 	],
 	"developer": "oatmealine",
 	"description": "Integrates the Non-Listworthy Extreme Demon spreadsheet into level pages",
+	"repository": "https://github.com/oatmealine/nlw-integration",
 	"resources": {
 		"spritesheets": {
 			"NLW_icons": [
