@@ -2,9 +2,10 @@
 	"geode": "2.0.0-beta.12",
 	"gd": {
 		"win": "2.204",
-		"mac": "2.200"
+		"mac": "2.200",
+		"android": "2.205"
 	},
-	"version": "v1.1.0",
+	"version": "v1.1.1",
 	"id": "oatmealine.nlw_integration",
 	"name": "NLW Integration",
 	"dependencies": [
