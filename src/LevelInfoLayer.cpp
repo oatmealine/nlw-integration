@@ -10,6 +10,7 @@
 #include "Geode/loader/Log.hpp"
 #include "ListManager.h"
 #include "NLWRating.h"
+#include "ccTypes.h"
 
 using namespace geode::prelude;
 
@@ -41,6 +42,7 @@ class $modify(NLWInfoLayer, LevelInfoLayer) {
 		this->addChild(menu);
 		auto label = CCLabelBMFont::create(rating->format().c_str(), "bigFont.fnt");
 		label->setScale(0.5f);
+		label->setColor(rating->type == NLWRatingType::Pending ? cocos2d::ccColor3B(255, 255, 255) : ListManager::getTierColor(rating->tier));
 		auto tier = CCMenuItemSpriteExtra::create(
 			label, this, menu_selector(NLWInfoLayer::openNLWInfoPane)
 		);

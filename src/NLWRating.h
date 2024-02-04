@@ -15,6 +15,7 @@ class NLWRating {
 
 		NLWRating() = default;
 
+		int sheetIndex;
 		NLWRatingType type;
 		std::string tier;
 		std::string name;

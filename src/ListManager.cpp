@@ -1,7 +1,9 @@
 #include "ListManager.h"
+#include "Geode/loader/Log.hpp"
 #include "NLWRating.h"
 #include <Geode/utils/web.hpp>
 #include <matjson.hpp>
+#include <string>
 
 using namespace geode::prelude;
 
@@ -29,12 +31,14 @@ void ListManager::init() {
 				ListManager::fetchedRatings = true;
 				ListManager::erroredRatings = false;
 				ListManager::parseResponse(val);
+				log::info("successfully fetched {} levels", ListManager::ratings.size());
 			})
 			.expect([](std::string const& error) {
 				ListManager::fetchedRatings = true;
 				ListManager::erroredRatings = true;
 				std::string errorStr = "\n\n<cr>Could not fetch NLW data.</c>\nThe API could be down, or this is could be a temporary network failure. Restart your game to try again!";
 				FLAlertLayer::create("Error", error + errorStr, "OK")->show();
+				log::error(error);
 			});
 	}
 }
@@ -60,4 +64,42 @@ std::optional<NLWRating> ListManager::getRating(GJGameLevel* level) {
 	}
 
 	return matches[0];
+}
+
+cocos2d::ccColor3B ListManager::getTierColor(std::string tier) {
+	// regular tiers
+	if (tier == "Fuck")        return cocos2d::ccColor3B(0,   0,   0  );
+	if (tier == "Beginner")    return cocos2d::ccColor3B(58,  134, 228);
+	if (tier == "Easy")        return cocos2d::ccColor3B(0,   255, 254);
+	if (tier == "Medium")      return cocos2d::ccColor3B(0,   255, 55 );
+	if (tier == "Hard")        return cocos2d::ccColor3B(255, 255, 63 );
+	if (tier == "Very Hard")   return cocos2d::ccColor3B(255, 153, 43 );
+	if (tier == "Insane")      return cocos2d::ccColor3B(255, 3,   28 );
+	if (tier == "Extreme")     return cocos2d::ccColor3B(255, 12,  251);
+	if (tier == "Remorseless") return cocos2d::ccColor3B(157, 10,  250);
+	if (tier == "Relentless")  return cocos2d::ccColor3B(178, 135, 232);
+	if (tier == "Terrifying")  return cocos2d::ccColor3B(204, 204, 204);
+
+	// pending
+	if (tier == "Low End")            return cocos2d::ccColor3B(0,   192, 237);
+	if (tier == "Low-Mid Range")      return cocos2d::ccColor3B(0,   255, 135);
+	if (tier == "Mid Range")          return cocos2d::ccColor3B(255, 204, 52 );
+	if (tier == "Mid-High Range")     return cocos2d::ccColor3B(255, 5,   128);
+	if (tier == "High End")           return cocos2d::ccColor3B(167, 93,  242);
+	if (tier == "Unknown")            return cocos2d::ccColor3B(255, 255, 255);
+	if (tier == "New Rates")          return cocos2d::ccColor3B(255, 255, 255);
+	if (tier == "Potential Extremes") return cocos2d::ccColor3B(235, 235, 235);
+
+	return cocos2d::ccColor3B(255, 255, 255);
+}
+
+std::string ListManager::getRatingLink(NLWRating rating) {
+	int sheetID = 0;
+	if (rating.type == NLWRatingType::Platformer) sheetID = 339121001;
+	if (rating.type == NLWRatingType::Pending) sheetID = 1134134033;
+
+	auto rowID = std::to_string(rating.sheetIndex);
+	std::string range = rowID + ":" + rowID;
+
+	return "https://docs.google.com/spreadsheets/d/1rMTZswvQHVEY7L4L89iGqQFJE-pHTWdLu1RIwcMmTNM/edit#gid=" + std::to_string(sheetID) + "&range=" + range;
 }

@@ -3,6 +3,7 @@
 
 #include "Geode/binding/GJGameLevel.hpp"
 #include "NLWRating.h"
+#include "ccTypes.h"
 
 using namespace geode::prelude;
 
@@ -15,6 +16,8 @@ class ListManager {
 		static bool erroredRatings;
 		static void init();
 		static std::optional<NLWRating> getRating(GJGameLevel*);
+		static cocos2d::ccColor3B getTierColor(std::string tier);
+		static std::string getRatingLink(NLWRating rating);
 };
 
 #endif // LISTMANAGER_H

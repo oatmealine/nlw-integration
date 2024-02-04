@@ -3,6 +3,7 @@
 using namespace geode::prelude;
 
 NLWRating::NLWRating(matjson::Value levelData) {
+	this->sheetIndex = levelData["sheetIndex"].as_int();
 	auto type = levelData["type"].as_string();
 	if (type == "platformer") {
 		this->type = NLWRatingType::Platformer;
