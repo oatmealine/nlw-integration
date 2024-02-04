@@ -21,30 +21,30 @@ bool NLWInfoPopupLayer::setup(GJGameLevel* level, NLWRating* rating) {
 
 	auto name = CCLabelBMFont::create(rating->name.c_str(), "bigFont.fnt");
 	name->setPosition(ccp(90, 230));
-	name->setScale(0.85);
+	name->setScale(0.75);
 	name->setAnchorPoint({ 0.f, 0.5f });
 	m_mainLayer->addChild(name);
 
 	auto creator = CCLabelBMFont::create(("by " + rating->creator).c_str(), "bigFont.fnt");
 	creator->setPosition(ccp(90, 204));
-	creator->setScale(0.85);
+	creator->setScale(0.75);
 	creator->setAnchorPoint({ 0.f, 0.5f });
 	creator->setAlignment(CCTextAlignment::kCCTextAlignmentLeft);
 	m_mainLayer->addChild(creator);
 
 	auto tier = CCLabelBMFont::create((rating->type == NLWRatingType::Pending ? rating->tier : (rating->tier + " Tier")).c_str(), "bigFont.fnt");
 	tier->setPosition(ccp(385, 230));
-	tier->setScale(0.85);
+	tier->setScale(0.75);
 	tier->setColor(ListManager::getTierColor(rating->tier));
 	m_mainLayer->addChild(tier);
 
 	auto skillset = CCLabelBMFont::create(rating->skillset.c_str(), "bigFont.fnt");
 	skillset->setPosition(ccp(385, 204));
-	skillset->setScale(0.65f);
+	skillset->setScale(0.5);
 	m_mainLayer->addChild(skillset);
 
-	auto const descSize = CCSize { 390.f, 70.f };
-	auto const descPos = (winSize - descSize) / 2 - ccp(0.f, 15.f);
+	auto const descSize = CCSize { 380.f, 70.f };
+	auto const descPos = (winSize - descSize) / 2 - ccp(0.f, 20.f);
 
 	cocos2d::extension::CCScale9Sprite* descBg = cocos2d::extension::CCScale9Sprite::create("square02b_001.png", { 0.0f, 0.0f, 80.0f, 80.0f });
 	descBg->setContentSize(descSize);
@@ -57,9 +57,9 @@ bool NLWInfoPopupLayer::setup(GJGameLevel* level, NLWRating* rating) {
 	description->setPosition(descPos);
 	description->setTouchEnabled(true);
 	
-	auto text = geode::SimpleTextArea::create(rating->description, "chatFont.fnt", 1.f, descSize.width - 10.f);
+	auto text = geode::SimpleTextArea::create(rating->description, "chatFont.fnt", 1.f, descSize.width - 20.f);
 	// help
-	text->setPosition(descSize.width / 2, descSize.height - text->getHeight() - 3);
+	text->setPosition(descSize.width / 2, descSize.height - text->getHeight() - 10);
 	text->setAnchorPoint({ 0.5f, 1.f });
 
 	description->m_contentLayer->addChild(text);
