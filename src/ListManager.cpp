@@ -101,5 +101,5 @@ std::string ListManager::getRatingLink(NLWRating rating) {
 	auto rowID = std::to_string(rating.sheetIndex);
 	std::string range = rowID + ":" + rowID;
 
-	return "https://docs.google.com/spreadsheets/d/1rMTZswvQHVEY7L4L89iGqQFJE-pHTWdLu1RIwcMmTNM/edit#gid=" + std::to_string(sheetID) + "&range=" + range;
+	return "https://docs.google.com/spreadsheets/d/1YxUE2kkvhT2E6AjnkvTf-o8iu_shSLbuFkEFcZOvieA/edit#gid=" + std::to_string(sheetID) + "&range=" + range;
 }

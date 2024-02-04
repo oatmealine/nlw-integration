@@ -1,7 +1,5 @@
 #include <Geode/Bindings.hpp>
 #include <Geode/modify/LevelInfoLayer.hpp>
-#include <ostream>
-#include <sstream>
 #include <string>
 
 #include "Geode/binding/CCMenuItemSpriteExtra.hpp"
@@ -9,6 +7,7 @@
 #include "Geode/cocos/menu_nodes/CCMenu.h"
 #include "Geode/loader/Log.hpp"
 #include "ListManager.h"
+#include "NLWInfoPopupLayer.h"
 #include "NLWRating.h"
 #include "ccTypes.h"
 
@@ -58,19 +57,7 @@ class $modify(NLWInfoLayer, LevelInfoLayer) {
 	}
 
 	void openNLWInfoPane(CCObject *sender) {
-		auto rating = this->m_fields->m_rating;
-
-		std::stringstream description;
-
-		if (rating.type == NLWRatingType::Pending) description << "<cj>Pending</c>" << std::endl;
-		description << "<cr>Tier:</c> " << rating.tier << std::endl;
-		description << "<cy>Skillsets:</c> " << rating.skillset << std::endl;
-		if (rating.enjoyment != -1.f) description << "<cg>Enjoyment:</c> " << rating.enjoyment << std::endl;
-		description << rating.description;
-
-		auto layer = FLAlertLayer::create(
-			"NLW Ranking", description.str(), "Close"
-		);
+		auto layer = NLWInfoPopupLayer::create(this->m_level, &this->m_fields->m_rating);
 		layer->show();
 	}
 };
