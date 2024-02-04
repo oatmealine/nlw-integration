@@ -4,7 +4,7 @@
 		"win": "2.204",
 		"mac": "2.200"
 	},
-	"version": "v1.0.0",
+	"version": "v1.1.0",
 	"id": "oatmealine.nlw_integration",
 	"name": "NLW Integration",
 	"dependencies": [
