@@ -108,7 +108,7 @@ std::string ListManager::getRatingLink(NLWRating rating) {
 	if (rating.type == NLWRatingType::Platformer) sheetID = 339121001;
 	if (rating.type == NLWRatingType::Pending) sheetID = 1134134033;
 
-	auto rowID = std::to_string(rating.sheetIndex);
+	auto rowID = std::to_string(rating.sheetIndex + 1);
 	std::string range = rowID + ":" + rowID;
 
 	return "https://docs.google.com/spreadsheets/d/1YxUE2kkvhT2E6AjnkvTf-o8iu_shSLbuFkEFcZOvieA/edit#gid=" + std::to_string(sheetID) + "&range=" + range;
