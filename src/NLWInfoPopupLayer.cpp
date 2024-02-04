@@ -24,6 +24,8 @@ bool NLWInfoPopupLayer::setup(GJGameLevel* level, NLWRating* rating) {
 	name->setPosition(ccp(90, 230));
 	name->setScale(0.75);
 	name->setAnchorPoint({ 0.f, 0.5f });
+	name->setAlignment(CCTextAlignment::kCCTextAlignmentLeft);
+	name->limitLabelWidth(170.f, 0.75f, 0.1f);
 	m_mainLayer->addChild(name);
 
 	auto creator = CCLabelBMFont::create(("by " + rating->creator).c_str(), "bigFont.fnt");
@@ -31,17 +33,20 @@ bool NLWInfoPopupLayer::setup(GJGameLevel* level, NLWRating* rating) {
 	creator->setScale(0.75);
 	creator->setAnchorPoint({ 0.f, 0.5f });
 	creator->setAlignment(CCTextAlignment::kCCTextAlignmentLeft);
+	creator->limitLabelWidth(195.f, 0.75f, 0.1f);
 	m_mainLayer->addChild(creator);
 
 	auto tier = CCLabelBMFont::create((rating->type == NLWRatingType::Pending ? rating->tier : (rating->tier + " Tier")).c_str(), "bigFont.fnt");
 	tier->setPosition(ccp(385, 230));
 	tier->setScale(0.75);
 	tier->setColor(ListManager::getTierColor(rating->tier));
+	tier->limitLabelWidth(180.f, 0.75f, 0.1f);
 	m_mainLayer->addChild(tier);
 
 	auto skillset = CCLabelBMFont::create(rating->skillset.c_str(), "bigFont.fnt");
 	skillset->setPosition(ccp(385, 204));
 	skillset->setScale(0.5);
+	skillset->limitLabelWidth(180.f, 0.5f, 0.1f);
 	m_mainLayer->addChild(skillset);
 
 	auto const descSize = CCSize { 380.f, 70.f };
