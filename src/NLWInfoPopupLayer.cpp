@@ -8,6 +8,7 @@
 #include "Geode/utils/web.hpp"
 #include "ListManager.h"
 #include "NLWRating.h"
+#include "PlainTextArea.hpp"
 #include "ccTypes.h"
 #include <algorithm>
 #include <fmt/format.h>
@@ -72,7 +73,7 @@ bool NLWInfoPopupLayer::setup(GJGameLevel* level, NLWRating* rating) {
 	description->m_contentLayer->setContentSize({ descSize.width, std::max(text->getHeight(), descSize.height) });
 	m_mainLayer->addChild(description);*/
 
-	auto description = MDTextArea::create(rating->description, descSize);
+	auto description = PlainTextArea::create(rating->description, descSize);
 	description->setPosition(descPos);
 	description->setTouchEnabled(true);
 	m_mainLayer->addChild(description);
