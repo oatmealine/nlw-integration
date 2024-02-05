@@ -5,7 +5,7 @@ on:
   push:
     branches:
       - "main"
-			- "ids-integration"
+      - "ids-integration"
 
 jobs:
   build:
