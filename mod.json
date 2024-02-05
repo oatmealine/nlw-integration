@@ -17,7 +17,7 @@
 	],
 	"developer": "oatmealine",
 	"description": "Integrates the Insane Demon Spreadsheet into level pages",
-	"repository": "https://github.com/oatmealine/nlw-integration",
+	"repository": "https://github.com/oatmealine/nlw-integration/tree/ids-integration",
 	"resources": {
 		"spritesheets": {
 			"NLW_icons": [
