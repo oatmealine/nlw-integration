@@ -16,11 +16,7 @@ NLWRating::NLWRating(matjson::Value levelData) {
 	this->name = levelData["name"].is_string() ? levelData["name"].as_string() : "?";
 	this->creator = levelData["creator"].is_string() ? levelData["creator"].as_string() : "?";
 	this->skillset = levelData["skillset"].is_string() ? levelData["skillset"].as_string() : "";
-	try {
-		this->enjoyment = levelData["enjoyment"].is_string() ? std::stoi(levelData["enjoyment"].as_string()) : -1.0f;
-	} catch (const std::invalid_argument& ia) {
-	  this->enjoyment = -1.0f;
-  }
+	this->enjoyment = levelData["enjoyment"].is_number() ? static_cast<float>(levelData["enjoyment"].as_double()) : -1.f; // unsure if the cast is necessary but better safe than sorry
 	this->description = levelData["description"].is_string() ? levelData["description"].as_string() : "";
 }
 
