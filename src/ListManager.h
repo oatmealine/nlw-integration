@@ -15,6 +15,7 @@ class ListManager {
 		static bool fetchedRatings;
 		static bool erroredRatings;
 		static void init();
+		static void throwError(std::string message);
 		static std::optional<NLWRating> getRating(GJGameLevel*);
 		static cocos2d::ccColor3B getTierColor(std::string tier);
 		static cocos2d::ccColor3B getEnjoymentColor(float enjoyment);

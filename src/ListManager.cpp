@@ -15,6 +15,11 @@ bool ListManager::erroredRatings;
 std::vector<NLWRating> ListManager::ratings;
 
 void ListManager::parseResponse(matjson::Value data) {
+	if (!data.is_array()) {
+		log::error("got unexpected data: {}", data.dump());
+		ListManager::throwError("expected root element to be an array! check logs");
+	}
+
 	auto arr = data.as_array();
 
 	for (auto& level : arr) {
@@ -35,13 +40,17 @@ void ListManager::init() {
 				log::info("successfully fetched {} levels", ListManager::ratings.size());
 			})
 			.expect([](std::string const& error) {
-				ListManager::fetchedRatings = true;
-				ListManager::erroredRatings = true;
-				std::string errorStr = "\n\n<cr>Could not fetch NLW data.</c>\nThe API could be down, or this is could be a temporary network failure. Restart your game to try again!";
-				FLAlertLayer::create("Error", error + errorStr, "OK")->show();
-				//log::error(error);
+				ListManager::throwError(error);
 			});
 	}
+}
+
+void ListManager::throwError(std::string message) {
+	ListManager::fetchedRatings = true;
+	ListManager::erroredRatings = true;
+	std::string errorStr = "\n\n<cr>Could not fetch NLW data.</c>\nThe API could be down, or this is could be a temporary network failure. Restart your game to try again!";
+	FLAlertLayer::create("Error", message + errorStr, "OK")->show();
+	log::error("error fetching ratings: {}", message);
 }
 
 std::optional<NLWRating> ListManager::getRating(GJGameLevel* level) {
