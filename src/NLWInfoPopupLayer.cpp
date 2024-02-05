@@ -1,8 +1,6 @@
 #include "NLWInfoPopupLayer.h"
 #include "Geode/binding/GJGameLevel.hpp"
 #include "Geode/loader/Log.hpp"
-#include "Geode/ui/MDTextArea.hpp"
-#include "Geode/ui/TextArea.hpp"
 #include "Geode/cocos/cocoa/CCGeometry.h"
 #include "Geode/cocos/label_nodes/CCLabelBMFont.h"
 #include "Geode/utils/web.hpp"
@@ -10,7 +8,6 @@
 #include "NLWRating.h"
 #include "PlainTextArea.hpp"
 #include "ccTypes.h"
-#include <algorithm>
 #include <fmt/format.h>
 
 using namespace geode::prelude;
@@ -52,26 +49,6 @@ bool NLWInfoPopupLayer::setup(GJGameLevel* level, NLWRating* rating) {
 
 	auto const descSize = CCSize { 380.f, 70.f };
 	auto const descPos = winSize / 2 - ccp(0.f, 10.f);
-
-	/*cocos2d::extension::CCScale9Sprite* descBg = cocos2d::extension::CCScale9Sprite::create("square02b_001.png", { 0.0f, 0.0f, 80.0f, 80.0f });
-	descBg->setContentSize(descSize);
-	descBg->setPosition(descPos);
-	descBg->setAnchorPoint({0.f, 0.f});
-	descBg->setColor({130,64,33});
-	m_mainLayer->addChild(descBg);
-
-	auto description = ScrollLayer::create(descSize);
-	description->setPosition(descPos);
-	description->setTouchEnabled(true);
-	
-	auto text = geode::SimpleTextArea::create(rating->description, "chatFont.fnt", 1.f, descSize.width - 20.f);
-	// help
-	text->setPosition(descSize.width / 2, descSize.height - text->getHeight() - 10);
-	text->setAnchorPoint({ 0.5f, 1.f });
-
-	description->m_contentLayer->addChild(text);
-	description->m_contentLayer->setContentSize({ descSize.width, std::max(text->getHeight(), descSize.height) });
-	m_mainLayer->addChild(description);*/
 
 	auto description = PlainTextArea::create(rating->description, descSize);
 	description->setPosition(descPos);
