@@ -4,12 +4,6 @@
 #include <matjson.hpp>
 #include <optional>
 
-enum NLWRatingType {
-	Regular,
-	Platformer,
-	Pending,
-};
-
 class NLWRating {
 	public:
 		explicit NLWRating(matjson::Value levelData);
@@ -17,12 +11,10 @@ class NLWRating {
 		NLWRating() = default;
 
 		int sheetIndex;
-		NLWRatingType type;
 		std::string tier;
 		std::string name;
 		std::string creator;
 		std::string skillset;
-		float enjoyment;
 		std::string description;
 		std::optional<std::string> broken;
 

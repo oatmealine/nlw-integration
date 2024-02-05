@@ -41,7 +41,7 @@ class $modify(NLWInfoLayer, LevelInfoLayer) {
 		this->addChild(menu);
 		auto label = CCLabelBMFont::create(rating->format().c_str(), "bigFont.fnt");
 		label->setScale(0.5f);
-		label->setColor(rating->type == NLWRatingType::Pending ? cocos2d::ccColor3B(255, 255, 255) : ListManager::getTierColor(rating->tier));
+		label->setColor(ListManager::getTierColor(rating->tier));
 		auto tier = CCMenuItemSpriteExtra::create(
 			label, this, menu_selector(NLWInfoLayer::openNLWInfoPane)
 		);
@@ -52,7 +52,7 @@ class $modify(NLWInfoLayer, LevelInfoLayer) {
 		LevelInfoLayer::updateLabelValues();
 		if (!ListManager::fetchedRatings || ListManager::erroredRatings) return;
 		if (this->m_level->m_stars != 10) return;
-		if (this->m_level->m_demonDifficulty != 6) return; // extreme demob
+		if (this->m_level->m_demonDifficulty != 5) return; // insane demob
         
 		updateDifficultyFace();
 	}

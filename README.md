@@ -1,4 +1,4 @@
-# NLWIntegration
+# IDSIntegration
 
-Uses the [Non-Listworthy Extreme Demons spreadsheet](https://docs.google.com/spreadsheets/d/1YxUE2kkvhT2E6AjnkvTf-o8iu_shSLbuFkEFcZOvieA/edit#gid=190861115)
-with [nlw-api](https://nlw.oat.zone/) to query tiers, skillsets, enjoyments and descriptions for all extreme demons.
+Uses the [Insane Demon Spreadsheet](https://docs.google.com/spreadsheets/d/15ehtAIpCR8s04qIb8zij9sTpUdGJbmAE_LDcfVA3tcU/edit)
+with [nlw-api](https://nlw.oat.zone/) to query tiers, skillsets and descriptions for all insane demons. Fork of [NLW Integration](https://github.com/oatmealine/nlw-integration).

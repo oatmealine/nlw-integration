@@ -8,7 +8,7 @@
 
 using namespace geode::prelude;
 
-const std::string NLW_API_URL = "https://nlw.oat.zone/list?type=all";
+const std::string NLW_API_URL = "https://nlw.oat.zone/ids";
 
 bool ListManager::fetchedRatings;
 bool ListManager::erroredRatings;
@@ -48,7 +48,7 @@ void ListManager::init() {
 void ListManager::throwError(std::string message) {
 	ListManager::fetchedRatings = true;
 	ListManager::erroredRatings = true;
-	std::string errorStr = "\n\n<cr>Could not fetch NLW data.</c>\nThe API could be down, or this is could be a temporary network failure. Restart your game to try again!";
+	std::string errorStr = "\n\n<cr>Could not fetch IDS data.</c>\nThe API could be down, or this is could be a temporary network failure. Restart your game to try again!";
 	FLAlertLayer::create("Error", message + errorStr, "OK")->show();
 	log::error("error fetching ratings: {}", message);
 }
@@ -113,12 +113,10 @@ cocos2d::ccColor3B ListManager::getEnjoymentColor(float enjoyment) {
 }
 
 std::string ListManager::getRatingLink(NLWRating rating) {
-	int sheetID = 0;
-	if (rating.type == NLWRatingType::Platformer) sheetID = 339121001;
-	if (rating.type == NLWRatingType::Pending) sheetID = 1134134033;
+	int sheetID = 1309758655;
 
 	auto rowID = std::to_string(rating.sheetIndex + 1);
 	std::string range = rowID + ":" + rowID;
 
-	return "https://docs.google.com/spreadsheets/d/1YxUE2kkvhT2E6AjnkvTf-o8iu_shSLbuFkEFcZOvieA/edit#gid=" + std::to_string(sheetID) + "&range=" + range;
+	return "https://docs.google.com/spreadsheets/d/15ehtAIpCR8s04qIb8zij9sTpUdGJbmAE_LDcfVA3tcU/edit#gid=" + std::to_string(sheetID) + "&range=" + range;
 }
