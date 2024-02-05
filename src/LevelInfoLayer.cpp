@@ -52,6 +52,7 @@ class $modify(NLWInfoLayer, LevelInfoLayer) {
 		LevelInfoLayer::updateLabelValues();
 		if (!ListManager::fetchedRatings || ListManager::erroredRatings) return;
 		if (this->m_level->m_stars != 10) return;
+		if (this->m_level->m_demonDifficulty != 6) return; // extreme demob
         
 		updateDifficultyFace();
 	}
