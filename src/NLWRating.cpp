@@ -18,6 +18,9 @@ NLWRating::NLWRating(matjson::Value levelData) {
 	this->skillset = levelData["skillset"].is_string() ? levelData["skillset"].as_string() : "";
 	this->enjoyment = levelData["enjoyment"].is_number() ? static_cast<float>(levelData["enjoyment"].as_double()) : -1.f; // unsure if the cast is necessary but better safe than sorry
 	this->description = levelData["description"].is_string() ? levelData["description"].as_string() : "";
+	if (levelData["broken"].is_string()) {
+		this->broken = levelData["broken"].as_string();
+	}
 }
 
 std::string NLWRating::format() {

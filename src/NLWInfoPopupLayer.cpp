@@ -108,6 +108,14 @@ bool NLWInfoPopupLayer::setup(GJGameLevel* level, NLWRating* rating) {
 		name->setPosition(name->getPosition() + ccp(25, 0));
 	}
 
+	std::string brokenStr = rating->broken.value_or("unknown");
+	auto broken = CCLabelBMFont::create(fmt::format("Broken in 2.2: {}", brokenStr).c_str(), "goldFont.fnt");
+	broken->setPosition(90, 90);
+	broken->setAnchorPoint({ 0.f, 0.5f });
+	broken->setAlignment(CCTextAlignment::kCCTextAlignmentLeft);
+	broken->limitLabelWidth(150.f, 0.5f, 0.1f);
+	m_mainLayer->addChild(broken);
+
 	return true;
 }
 

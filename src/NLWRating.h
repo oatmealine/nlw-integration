@@ -2,6 +2,7 @@
 #define NLWRATING_H
 
 #include <matjson.hpp>
+#include <optional>
 
 enum NLWRatingType {
 	Regular,
@@ -23,6 +24,7 @@ class NLWRating {
 		std::string skillset;
 		float enjoyment;
 		std::string description;
+		std::optional<std::string> broken;
 
 		std::string format();
 };
