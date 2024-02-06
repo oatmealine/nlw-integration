@@ -1,8 +1,10 @@
 #include "ListManager.h"
+#include "Geode/c++stl/string.hpp"
 #include "Geode/loader/Log.hpp"
 #include "NLWRating.h"
 #include "ccTypes.h"
 #include <Geode/utils/web.hpp>
+#include <cctype>
 #include <matjson.hpp>
 #include <string>
 
@@ -53,14 +55,32 @@ void ListManager::throwError(std::string message) {
 	log::error("error fetching ratings: {}", message);
 }
 
+std::string lowercase(std::string data) {
+	auto lower = std::transform(data.begin(), data.end(), data.begin(),
+    [](unsigned char c){ return std::tolower(c); });
+	std::string expectsString(1, *lower);
+	return expectsString;
+}
+
 std::optional<NLWRating> ListManager::getRating(GJGameLevel* level) {
 	auto name = level->m_levelName;
 	auto creator = level->m_creatorName;
 
-	std::vector<NLWRating> matches;
+	// initial scan for exact name match
 
 	for (auto rating : ListManager::ratings) {
-		if (rating.name.find(name) != std::string::npos) {
+		if (gd::string(rating.name) == name) {
+			return rating;
+		}
+	}
+
+	// look for substrings
+
+	std::vector<NLWRating> matches;
+	auto lowerName = lowercase(std::string(name));
+
+	for (auto rating : ListManager::ratings) {
+		if (lowercase(rating.name).find(lowerName) != std::string::npos) {
 			matches.push_back(rating);
 		}
 	}
@@ -68,10 +88,15 @@ std::optional<NLWRating> ListManager::getRating(GJGameLevel* level) {
 	if (matches.empty()) return {};
 	if (matches.size() == 1) return matches[0];
 
+	// try to match creator
+
+	auto lowerCreator = lowercase(creator);
 	for (auto rating : matches) {
-		if (rating.creator.find(creator) != std::string::npos)
+		if (lowercase(rating.creator).find(lowerCreator) != std::string::npos)
 			return rating;
 	}
+
+	// fall back to first guess
 
 	return matches[0];
 }
