@@ -1,3 +1,8 @@
+## v1.2.1
+
+- Improve rating string matching algorithm
+  - Mystic will no longer be mismatched to Mystic Bounds
+
 ## v1.2.0
 
 - **Fix crashes on Android**, hoo fucking ray
