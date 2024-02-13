@@ -1,17 +1,17 @@
 {
-	"geode": "2.0.0-beta.12",
+	"geode": "2.0.0-beta.19",
 	"gd": {
 		"win": "2.204",
 		"mac": "2.200",
 		"android": "2.205"
 	},
-	"version": "v1.2.1",
+	"version": "v1.3.0",
 	"id": "oatmealine.ids_integration",
 	"name": "IDS Integration",
 	"dependencies": [
 		{
 			"id": "geode.node-ids",
-			"version": ">=v1.1.4",
+			"version": ">=v1.4.0",
 			"importance": "required"
 		}
 	],
