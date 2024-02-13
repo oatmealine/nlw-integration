@@ -24,5 +24,13 @@
 				"resources/*.png"
 			]
 		}
+	},
+	"settings": {
+		"use-demon-face": {
+			"name": "Use Demon Face",
+			"description": "Disables the tier text and lets you access the menu by clicking on the demon icon",
+			"type": "bool",
+			"default": false
+		}
 	}
 }
