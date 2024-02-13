@@ -1,5 +1,6 @@
 // largely based on https://github.com/geode-sdk/geode/blob/241ddc317ac84d58ddadf3d26bb76fe159975ea8/loader/src/ui/nodes/MDTextArea.cpp
 
+#include <Geode/Geode.hpp>
 #include <Geode/binding/ProfilePage.hpp>
 #include <Geode/binding/CCContentLayer.hpp>
 #include <Geode/loader/Mod.hpp>

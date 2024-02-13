@@ -1,3 +1,4 @@
+#include <Geode/Geode.hpp>
 #include "NLWRating.h"
 
 using namespace geode::prelude;

@@ -3,6 +3,7 @@
 #include <Geode/modify/LevelInfoLayer.hpp>
 #include <string>
 
+#include <Geode/Geode.hpp>
 #include "Geode/Enums.hpp"
 #include "Geode/binding/CCMenuItemSpriteExtra.hpp"
 #include "Geode/binding/GJDifficultySprite.hpp"
