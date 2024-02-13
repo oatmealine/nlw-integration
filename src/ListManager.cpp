@@ -1,4 +1,5 @@
 #include "ListManager.h"
+#include <Geode/Geode.hpp>
 #include "Geode/c++stl/string.hpp"
 #include "Geode/loader/Log.hpp"
 #include "NLWRating.h"

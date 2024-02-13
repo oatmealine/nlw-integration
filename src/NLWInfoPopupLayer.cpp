@@ -1,4 +1,5 @@
 #include "NLWInfoPopupLayer.h"
+#include <Geode/Geode.hpp>
 #include "Geode/binding/GJGameLevel.hpp"
 #include "Geode/loader/Log.hpp"
 #include "Geode/cocos/cocoa/CCGeometry.h"
