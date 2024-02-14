@@ -18,7 +18,11 @@ class $modify(NLWInfoLayer, LevelInfoLayer) {
 	CCMenu* m_menu = nullptr;
 
 	void updateDifficultyFace() {
-		if (this->m_fields->m_menu != nullptr) return;
+		if (!ListManager::fetchedRatings || ListManager::erroredRatings) return;
+		if (this->m_level->m_stars != 10) return;
+		if (this->m_level->m_demonDifficulty != 5) return; // INSANE demob
+
+		if (this->m_fields->m_menu == nullptr) return;
 
 		auto rating = ListManager::getRating(m_level);
 		if (!rating.has_value()) {
@@ -50,10 +54,6 @@ class $modify(NLWInfoLayer, LevelInfoLayer) {
 
 	void updateLabelValues() {
 		LevelInfoLayer::updateLabelValues();
-		if (!ListManager::fetchedRatings || ListManager::erroredRatings) return;
-		if (this->m_level->m_stars != 10) return;
-		if (this->m_level->m_demonDifficulty != 5) return; // insane demob
-        
 		updateDifficultyFace();
 	}
 
