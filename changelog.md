@@ -1,3 +1,9 @@
+## v1.3.1
+
+- No longer is every unplaced level Fuck tier
+  - C++ strings were a mistake
+- Non-extreme demons should no longer be given tiers. Hopefully for good this time
+
 ## v1.3.0
 
 - Add an option to disable the tier text and only see info upon clicking the demon face
