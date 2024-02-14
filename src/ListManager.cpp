@@ -57,10 +57,9 @@ void ListManager::throwError(std::string message) {
 }
 
 std::string lowercase(std::string data) {
-	auto lower = std::transform(data.begin(), data.end(), data.begin(),
-    [](unsigned char c){ return std::tolower(c); });
-	std::string expectsString(1, *lower);
-	return expectsString;
+	std::transform(data.begin(), data.end(), data.begin(),
+		[](unsigned char c){ return std::tolower(c); });
+	return data;
 }
 
 std::optional<NLWRating> ListManager::getRating(GJGameLevel* level) {
