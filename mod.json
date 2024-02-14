@@ -5,9 +5,15 @@
 		"mac": "2.200",
 		"android": "2.205"
 	},
+<<<<<<< HEAD
 	"version": "v1.3.0",
 	"id": "oatmealine.ids_integration",
 	"name": "IDS Integration",
+=======
+	"version": "v1.3.1",
+	"id": "oatmealine.nlw_integration",
+	"name": "NLW Integration",
+>>>>>>> 2d51e9a (bump ver to v1.3.1)
 	"dependencies": [
 		{
 			"id": "geode.node-ids",
