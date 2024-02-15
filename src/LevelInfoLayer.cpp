@@ -16,6 +16,22 @@ using namespace geode::prelude;
 class $modify(NLWInfoLayer, LevelInfoLayer) {
 	NLWRating m_rating;
 	CCMenu* m_menu = nullptr;
+	GJDifficultySprite* m_sprite = nullptr;
+	bool m_addedTier = false;
+
+	bool init(GJGameLevel* p0, bool p1) {
+		LevelInfoLayer::init(p0, p1);
+
+		auto menu = CCMenu::create();
+		menu->setID("tier_menu"_spr);
+
+		this->addChild(menu);
+		this->m_fields->m_menu = menu;
+
+		updateDifficultyFace();
+
+		return true;
+	}
 
 	void updateDifficultyFace() {
 		if (!ListManager::fetchedRatings || ListManager::erroredRatings) return;
