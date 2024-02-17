@@ -2,6 +2,7 @@
 #include <Geode/Geode.hpp>
 #include "Geode/c++stl/string.hpp"
 #include "Geode/loader/Log.hpp"
+#include "Geode/loader/Mod.hpp"
 #include "NLWRating.h"
 #include "ccTypes.h"
 #include <Geode/utils/web.hpp>
@@ -31,9 +32,38 @@ void ListManager::parseResponse(matjson::Value data) {
 	}
 }
 
+// https://www.winehq.org/pipermail/wine-devel/2008-September/069387.html
+std::string getWineVersion() {
+	#ifdef GEODE_IS_WINDOWS
+		static const char * (CDECL *pwine_get_version)(void);
+		HMODULE hntdll = GetModuleHandle("ntdll.dll");
+		if (!hntdll) return "";
+		pwine_get_version = (const char *(__cdecl *)(void))GetProcAddress(hntdll, "wine_get_version");
+		if (pwine_get_version) return fmt::format(" (Wine/{})", pwine_get_version());
+		return "";
+	#else
+		return "";
+	#endif
+}
+
+std::string getPlatformName() {
+	return GEODE_PLATFORM_NAME + getWineVersion();
+}
+
+std::string getUserAgent() {
+	return fmt::format("{}/{}; GeometryDash/{:.3f} (GeodeSDK/{}); {}",
+		Mod::get()->getID(),
+		Mod::get()->getVersion().toString(true),
+		GEODE_STR(GEODE_GD_VERSION),
+		Loader::get()->getVersion().toString(true),
+		getPlatformName()
+	);
+}
+
 void ListManager::init() {
 	if (!ListManager::fetchedRatings) {
 		web::AsyncWebRequest()
+			.userAgent(getUserAgent())
 			.fetch(NLW_API_URL)
 			.json()
 			.then([](matjson::Value const& val) {
