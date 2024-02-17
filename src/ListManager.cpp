@@ -51,7 +51,7 @@ std::string getPlatformName() {
 }
 
 std::string getUserAgent() {
-	return fmt::format("{}/{}; GeometryDash/{:.3f} (GeodeSDK/{}); {}",
+	return fmt::format("{}/{}; GeometryDash/{} (GeodeSDK/{}); {}",
 		Mod::get()->getID(),
 		Mod::get()->getVersion().toString(true),
 		GEODE_STR(GEODE_GD_VERSION),
