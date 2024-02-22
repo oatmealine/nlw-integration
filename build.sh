@@ -7,8 +7,8 @@ export HOST_ARCH=x86
 
 cmake \
   -DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN \
-  -DGEODE_DISABLE_FMT_CONSTEVAL=1 \
   -DCMAKE_BUILD_TYPE=RelWithDebInfo \
-  -B build
+  -B build \
+	-G Ninja
   
 cmake --build build --config RelWithDebInfo
