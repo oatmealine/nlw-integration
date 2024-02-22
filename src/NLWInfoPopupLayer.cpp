@@ -1,6 +1,8 @@
 #include "NLWInfoPopupLayer.h"
 #include <Geode/Geode.hpp>
 #include "Geode/binding/GJGameLevel.hpp"
+#include "Geode/cocos/cocoa/CCObject.h"
+#include "Geode/cocos/menu_nodes/CCMenu.h"
 #include "Geode/loader/Log.hpp"
 #include "Geode/cocos/cocoa/CCGeometry.h"
 #include "Geode/cocos/label_nodes/CCLabelBMFont.h"
@@ -35,12 +37,20 @@ bool NLWInfoPopupLayer::setup(GJGameLevel* level, NLWRating* rating) {
 	creator->limitLabelWidth(195.f, 0.75f, 0.1f);
 	m_mainLayer->addChild(creator);
 
+	auto tierMenu = CCMenu::create();
+	tierMenu->setPosition(ccp(385, 230));
+	m_mainLayer->addChild(tierMenu);
+
 	auto tier = CCLabelBMFont::create((rating->type == NLWRatingType::Pending ? rating->tier : (rating->tier + " Tier")).c_str(), "bigFont.fnt");
-	tier->setPosition(ccp(385, 230));
 	tier->setScale(0.75);
 	tier->setColor(ListManager::getTierColor(rating->tier));
 	tier->limitLabelWidth(180.f, 0.75f, 0.1f);
-	m_mainLayer->addChild(tier);
+
+	auto tierMenuItem = CCMenuItemSpriteExtra::create(
+		tier, this, menu_selector(NLWInfoPopupLayer::openTierLevels)
+	);
+
+	tierMenu->addChild(tierMenuItem);
 
 	auto skillset = CCLabelBMFont::create(rating->skillset.c_str(), "bigFont.fnt");
 	skillset->setPosition(ccp(385, 204));
@@ -104,6 +114,16 @@ void NLWInfoPopupLayer::onOpen(CCObject* sender) {
 	}
 	auto url = ListManager::getRatingLink(*this->m_rating);
 	web::openLinkInBrowser(url);
+}
+
+void NLWInfoPopupLayer::openTierLevels(CCObject* sender) {
+	if (this->m_rating == nullptr) {
+		log::error("rating is nullptr??");
+		return;
+	}
+
+	auto browserLayer = LevelBrowserLayer::create(ListManager::getSearchObject(this->m_rating->tier));
+	geode::cocos::switchToScene(browserLayer);
 }
 
 NLWInfoPopupLayer* NLWInfoPopupLayer::create(GJGameLevel *level, NLWRating *rating) {

@@ -2,6 +2,7 @@
 #define LISTMANAGER_H
 
 #include "Geode/binding/GJGameLevel.hpp"
+#include "Geode/binding/GJSearchObject.hpp"
 #include "NLWRating.h"
 #include "ccTypes.h"
 
@@ -20,6 +21,7 @@ class ListManager {
 		static cocos2d::ccColor3B getTierColor(std::string tier);
 		static cocos2d::ccColor3B getEnjoymentColor(float enjoyment);
 		static std::string getRatingLink(NLWRating rating);
+		static GJSearchObject* getSearchObject(std::string tier);
 };
 
 #endif // LISTMANAGER_H

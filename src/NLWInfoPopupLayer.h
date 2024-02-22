@@ -12,6 +12,7 @@ class NLWInfoPopupLayer : public geode::Popup<GJGameLevel*, NLWRating*> {
 
 		bool setup(GJGameLevel* level, NLWRating* rating);
 		void onOpen(CCObject* sender);
+		void openTierLevels(CCObject* sender);
 
 	public:
 		static NLWInfoPopupLayer* create(GJGameLevel* level, NLWRating* rating);

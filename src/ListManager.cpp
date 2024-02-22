@@ -151,3 +151,23 @@ std::string ListManager::getRatingLink(NLWRating rating) {
 
 	return "https://docs.google.com/spreadsheets/d/1YxUE2kkvhT2E6AjnkvTf-o8iu_shSLbuFkEFcZOvieA/edit#gid=" + std::to_string(sheetID) + "&range=" + range;
 }
+
+GJSearchObject* ListManager::getSearchObject(std::string tier) {
+	std::stringstream download;
+	bool first = true;
+	for (auto rating : ListManager::ratings) {
+		if (rating.tier != tier) continue;
+
+		if (!first) {
+			download << ",";
+		}
+		download << rating.id;
+		first = false;
+	}
+
+	log::info("download str {}", download.str());
+	
+	download << "&gameVersion=22";
+	GJSearchObject* searchObj = GJSearchObject::create(SearchType::Type19, download.str());
+	return searchObj;
+}   
