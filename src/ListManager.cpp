@@ -93,42 +93,15 @@ std::string lowercase(std::string data) {
 }
 
 std::optional<NLWRating> ListManager::getRating(GJGameLevel* level) {
-	auto name = level->m_levelName;
-	auto creator = level->m_creatorName;
-
-	// initial scan for exact name match
+	auto id = level->m_levelID.value();
 
 	for (auto rating : ListManager::ratings) {
-		if (gd::string(rating.name) == name) {
+		if (id == rating.id) {
 			return rating;
 		}
 	}
 
-	// look for substrings
-
-	std::vector<NLWRating> matches;
-	auto lowerName = lowercase(std::string(name));
-
-	for (auto rating : ListManager::ratings) {
-		if (lowercase(rating.name).find(lowerName) != std::string::npos) {
-			matches.push_back(rating);
-		}
-	}
-
-	if (matches.empty()) return {};
-	if (matches.size() == 1) return matches[0];
-
-	// try to match creator
-
-	auto lowerCreator = lowercase(creator);
-	for (auto rating : matches) {
-		if (lowercase(rating.creator).find(lowerCreator) != std::string::npos)
-			return rating;
-	}
-
-	// fall back to first guess
-
-	return matches[0];
+	return std::nullopt;
 }
 
 cocos2d::ccColor3B ListManager::getTierColor(std::string tier) {

@@ -12,6 +12,7 @@ class NLWRating {
 
 		int sheetIndex;
 		std::string tier;
+		int id;
 		std::string name;
 		std::string creator;
 		std::string skillset;
