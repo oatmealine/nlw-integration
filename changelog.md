@@ -11,6 +11,7 @@ Based on `oatmealine.nlw_integration` v1.4.0-beta.2:
 - You can now click the tier text to show every level in that tier as a consequence
   - Some tiers don't work, and I'll work on ironing that out soon
 - Swap the popout from using `init` to `initAnchored`. Maybe fixes mobile alignment issues?
+- Support platformer levels, now that IDS has those
 
 ## v1.3.3
 
