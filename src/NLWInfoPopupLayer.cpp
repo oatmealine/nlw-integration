@@ -19,10 +19,14 @@ bool NLWInfoPopupLayer::setup(GJGameLevel* level, NLWRating* rating) {
 	this->m_level = level;
 	this->m_rating = rating;
 
+	// if you find out why this works PLEASE let me know
+	// this is just hardcoded for now and happened bc of initAnchored
+	auto offset = -ccp(75.f, 65.f);
+
 	auto winSize = CCDirector::sharedDirector()->getWinSize();
 
 	auto name = CCLabelBMFont::create(rating->name.c_str(), "bigFont.fnt");
-	name->setPosition(ccp(90, 230));
+	name->setPosition(ccp(90, 230) + offset);
 	name->setScale(0.75);
 	name->setAnchorPoint({ 0.f, 0.5f });
 	name->setAlignment(CCTextAlignment::kCCTextAlignmentLeft);
@@ -30,7 +34,7 @@ bool NLWInfoPopupLayer::setup(GJGameLevel* level, NLWRating* rating) {
 	m_mainLayer->addChild(name);
 
 	auto creator = CCLabelBMFont::create(("by " + rating->creator).c_str(), "bigFont.fnt");
-	creator->setPosition(ccp(90, 204));
+	creator->setPosition(ccp(90, 204) + offset);
 	creator->setScale(0.75);
 	creator->setAnchorPoint({ 0.f, 0.5f });
 	creator->setAlignment(CCTextAlignment::kCCTextAlignmentLeft);
@@ -38,7 +42,7 @@ bool NLWInfoPopupLayer::setup(GJGameLevel* level, NLWRating* rating) {
 	m_mainLayer->addChild(creator);
 
 	auto tierMenu = CCMenu::create();
-	tierMenu->setPosition(ccp(385, 230));
+	tierMenu->setPosition(ccp(385, 230) + offset);
 	m_mainLayer->addChild(tierMenu);
 
 	auto tier = CCLabelBMFont::create((rating->tier + " Tier").c_str(), "bigFont.fnt");
@@ -54,7 +58,7 @@ bool NLWInfoPopupLayer::setup(GJGameLevel* level, NLWRating* rating) {
 	tierMenu->addChild(tierMenuItem);
 
 	auto skillset = CCLabelBMFont::create(rating->skillset.c_str(), "bigFont.fnt");
-	skillset->setPosition(ccp(385, 204));
+	skillset->setPosition(ccp(385, 204) + offset);
 	skillset->setScale(0.5);
 	skillset->limitLabelWidth(180.f, 0.5f, 0.1f);
 	m_mainLayer->addChild(skillset);
@@ -63,7 +67,7 @@ bool NLWInfoPopupLayer::setup(GJGameLevel* level, NLWRating* rating) {
 	auto const descPos = winSize / 2 - ccp(0.f, 10.f);
 
 	auto description = PlainTextArea::create(rating->description, descSize);
-	description->setPosition(descPos);
+	description->setPosition(descPos + offset);
 	description->setTouchEnabled(true);
 	m_mainLayer->addChild(description);
 
@@ -73,12 +77,12 @@ bool NLWInfoPopupLayer::setup(GJGameLevel* level, NLWRating* rating) {
 	auto openBtn = CCMenuItemSpriteExtra::create(
 		openBtnSpr, this, menu_selector(NLWInfoPopupLayer::onOpen)
 	);
-	openBtn->setPosition(.0f, -m_size.height / 2 + 25.f);
+	openBtn->setPosition(m_size.width / 2.f, 25.f);
 	m_buttonMenu->addChild(openBtn);
 
 	std::string brokenStr = rating->broken.value_or("unknown");
 	auto broken = CCLabelBMFont::create(fmt::format("Broken in 2.2: {}", brokenStr).c_str(), "goldFont.fnt");
-	broken->setPosition(90, 90);
+	broken->setPosition(90 + offset.x, 90 + offset.y);
 	broken->setAnchorPoint({ 0.f, 0.5f });
 	broken->setAlignment(CCTextAlignment::kCCTextAlignmentLeft);
 	broken->limitLabelWidth(150.f, 0.5f, 0.1f);
@@ -108,7 +112,7 @@ void NLWInfoPopupLayer::openTierLevels(CCObject* sender) {
 
 NLWInfoPopupLayer* NLWInfoPopupLayer::create(GJGameLevel *level, NLWRating *rating) {
 	auto ret = new NLWInfoPopupLayer();
-	if (ret && ret->init(420.f, 190.f, level, rating)) {
+	if (ret && ret->initAnchored(420.f, 190.f, level, rating)) {
 		ret->autorelease();
 		return ret;
 	}
