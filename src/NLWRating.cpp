@@ -5,6 +5,12 @@ using namespace geode::prelude;
 
 NLWRating::NLWRating(matjson::Value levelData) {
 	this->sheetIndex = levelData["sheetIndex"].as_int();
+	auto type = levelData["type"].as_string();
+	if (type == "platformer") {
+		this->type = NLWRatingType::Platformer;
+	} else {
+		this->type = NLWRatingType::Regular;
+	}
 	this->tier = levelData["tier"].as_string();
 	this->id = levelData["id"].is_number() ? levelData["id"].as_int() : -1;
 	this->name = levelData["name"].is_string() ? levelData["name"].as_string() : "?";

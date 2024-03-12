@@ -12,7 +12,7 @@
 
 using namespace geode::prelude;
 
-const std::string NLW_API_URL = "https://nlw.oat.zone/ids";
+const std::string NLW_API_URL = "https://nlw.oat.zone/ids?type=all";
 
 bool ListManager::fetchedRatings;
 bool ListManager::erroredRatings;
@@ -142,6 +142,7 @@ cocos2d::ccColor3B ListManager::getEnjoymentColor(float enjoyment) {
 
 std::string ListManager::getRatingLink(NLWRating rating) {
 	int sheetID = 1309758655;
+	if (rating.type == NLWRatingType::Platformer) sheetID = 506524049;
 
 	auto rowID = std::to_string(rating.sheetIndex + 1);
 	std::string range = rowID + ":" + rowID;
