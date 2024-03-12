@@ -1,13 +1,6 @@
-## v1.4.0-beta.2
-
-> **Experimental release**
-
-- Swap the popout from using `init` to `initAnchored`. Maybe fixes mobile alignment issues?
-- Exploring some tiers still do not work. It is a complete mystery to me as to why! This is the last thing preventing this from being a stable release ATM
-
 ## v1.4.0-beta.1
 
-Based on `oatmealine.nlw_integration` v1.4.0-beta.1:
+Based on `oatmealine.nlw_integration` v1.4.0-beta.2:
 
 > **Experimental release**
 
@@ -17,6 +10,7 @@ Based on `oatmealine.nlw_integration` v1.4.0-beta.1:
   - This is experimental, and I can't test every level to make sure the matches are correct, so I'm putting out a beta release. Report any issues you find to me!
 - You can now click the tier text to show every level in that tier as a consequence
   - Some tiers don't work, and I'll work on ironing that out soon
+- Swap the popout from using `init` to `initAnchored`. Maybe fixes mobile alignment issues?
 
 ## v1.3.3
 
