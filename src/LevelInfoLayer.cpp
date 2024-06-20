@@ -14,10 +14,12 @@
 using namespace geode::prelude;
 
 class $modify(NLWInfoLayer, LevelInfoLayer) {
-	NLWRating m_rating;
-	CCMenu* m_menu = nullptr;
-	GJDifficultySprite* m_sprite = nullptr;
-	bool m_addedTier = false;
+	struct Fields {
+		NLWRating m_rating;
+		CCMenu* m_menu = nullptr;
+		GJDifficultySprite* m_sprite = nullptr;
+		bool m_addedTier = false;
+	};
 
 	bool init(GJGameLevel* p0, bool p1) {
 		LevelInfoLayer::init(p0, p1);
@@ -26,7 +28,7 @@ class $modify(NLWInfoLayer, LevelInfoLayer) {
 		menu->setID("tier_menu"_spr);
 
 		this->addChild(menu);
-		this->m_fields->m_menu = menu;
+		m_fields->m_menu = menu;
 
 		updateDifficultyFace();
 
@@ -38,7 +40,7 @@ class $modify(NLWInfoLayer, LevelInfoLayer) {
 		if (this->m_level->m_stars != 10) return;
 		if (this->m_level->m_demonDifficulty != 5) return; // INSANE demob
 
-		if (this->m_fields->m_menu == nullptr) return;
+		if (m_fields->m_menu == nullptr) return;
 
 		auto rating = ListManager::getRating(m_level);
 		if (!rating.has_value()) {
@@ -46,7 +48,7 @@ class $modify(NLWInfoLayer, LevelInfoLayer) {
 			return;
 		}
 		log::info("found demon rating for {} ({})", rating->name, rating->tier);
-		this->m_fields->m_rating = rating.value();
+		m_fields->m_rating = rating.value();
 
 		auto demon = m_difficultySprite;
 		if (demon == nullptr) {
@@ -66,6 +68,8 @@ class $modify(NLWInfoLayer, LevelInfoLayer) {
 			label, this, menu_selector(NLWInfoLayer::openNLWInfoPane)
 		);
 		menu->addChild(tier);
+
+		this->m_fields->m_addedTier = true;
 	}
 
 	void updateLabelValues() {
@@ -74,7 +78,7 @@ class $modify(NLWInfoLayer, LevelInfoLayer) {
 	}
 
 	void openNLWInfoPane(CCObject *sender) {
-		auto layer = NLWInfoPopupLayer::create(this->m_level, &this->m_fields->m_rating);
+		auto layer = NLWInfoPopupLayer::create(this->m_level, &m_fields->m_rating);
 		layer->show();
 	}
 };
