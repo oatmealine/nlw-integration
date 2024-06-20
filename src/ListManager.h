@@ -2,7 +2,9 @@
 #define LISTMANAGER_H
 
 #include "Geode/binding/GJGameLevel.hpp"
+#include <Geode/loader/Event.hpp>
 #include "Geode/binding/GJSearchObject.hpp"
+#include "Geode/utils/web.hpp"
 #include "NLWRating.h"
 #include "ccTypes.h"
 
@@ -11,6 +13,7 @@ using namespace geode::prelude;
 class ListManager {
 	static std::vector<NLWRating> ratings;
 	static void parseResponse(matjson::Value data);
+  static EventListener<web::WebTask> fetchListListener;
 
 	public:
 		static bool fetchedRatings;

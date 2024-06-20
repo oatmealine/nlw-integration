@@ -1,6 +1,5 @@
 #include "ListManager.h"
 #include <Geode/Geode.hpp>
-#include "Geode/c++stl/string.hpp"
 #include "Geode/loader/Log.hpp"
 #include "Geode/loader/Mod.hpp"
 #include "NLWRating.h"
@@ -18,6 +17,7 @@ const std::string NLW_API_URL = "https://nlw.oat.zone/list?type=all";
 bool ListManager::fetchedRatings;
 bool ListManager::erroredRatings;
 std::vector<NLWRating> ListManager::ratings;
+EventListener<web::WebTask> ListManager::fetchListListener;
 
 void ListManager::parseResponse(matjson::Value data) {
 	if (!data.is_array()) {
@@ -54,28 +54,39 @@ std::string getPlatformName() {
 std::string getUserAgent() {
 	return fmt::format("{}/{}; GeometryDash/{} (GeodeSDK/{}); {}",
 		Mod::get()->getID(),
-		Mod::get()->getVersion().toString(true),
+		Mod::get()->getVersion().toNonVString(true),
 		GEODE_STR(GEODE_GD_VERSION),
-		Loader::get()->getVersion().toString(true),
+		Loader::get()->getVersion().toNonVString(true),
 		getPlatformName()
 	);
 }
 
 void ListManager::init() {
-	if (!ListManager::fetchedRatings) {
-		web::AsyncWebRequest()
-			.userAgent(getUserAgent())
-			.fetch(NLW_API_URL)
-			.json()
-			.then([](matjson::Value const& val) {
+	ListManager::fetchListListener.bind([] (web::WebTask::Event* e) {
+    if (web::WebResponse* res = e->getValue()) {
+			auto json = res->json();
+			if (res->ok() && json.isOk()) {
 				ListManager::fetchedRatings = true;
 				ListManager::erroredRatings = false;
-				ListManager::parseResponse(val);
+				ListManager::parseResponse(json.unwrap());
 				log::info("successfully fetched {} levels", ListManager::ratings.size());
-			})
-			.expect([](std::string const& error) {
-				ListManager::throwError(error);
-			});
+			} else {
+				ListManager::throwError(fmt::format("{}: {}", res->code(), res->string().unwrapOr("No data returned")));
+			}
+    } else if (web::WebProgress* progress = e->getProgress()) {
+			// The request is still in progress...
+    } else if (e->isCancelled()) {
+			log::info("request cancelled?");
+    }
+	});
+
+	if (!ListManager::fetchedRatings) {
+		web::WebRequest req = web::WebRequest();
+
+		req.userAgent(getUserAgent());
+		auto task = req.get(NLW_API_URL);
+
+		ListManager::fetchListListener.setFilter(task);
 	}
 }
 

@@ -1,3 +1,10 @@
+## v1.4.0-beta.3
+
+> **Experimental release**
+
+- Ported to 2.206 and Geode 3.0.0
+  - `updateFeatureStateFromLevel` is currently missing its binding, so "Use Demon Face" will not reflect the featured state of the level.
+
 ## v1.4.0-beta.2
 
 > **Experimental release**
