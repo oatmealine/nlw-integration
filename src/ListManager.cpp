@@ -20,12 +20,13 @@ std::vector<NLWRating> ListManager::ratings;
 EventListener<web::WebTask> ListManager::fetchListListener;
 
 void ListManager::parseResponse(matjson::Value data) {
-	if (!data.is_array()) {
+	if (!data.isArray()) {
 		log::error("got unexpected data: {}", data.dump());
 		ListManager::throwError("expected root element to be an array! check logs");
+		return;
 	}
 
-	auto arr = data.as_array();
+	auto arr = data.asArray().unwrap();
 
 	for (auto& level : arr) {
 		auto rating = NLWRating(level);

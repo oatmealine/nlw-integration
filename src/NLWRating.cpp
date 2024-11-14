@@ -4,8 +4,8 @@
 using namespace geode::prelude;
 
 NLWRating::NLWRating(matjson::Value levelData) {
-	this->sheetIndex = levelData["sheetIndex"].as_int();
-	auto type = levelData["type"].as_string();
+	this->sheetIndex = levelData["sheetIndex"].asInt().unwrapOrDefault();
+	auto type = levelData["type"].asString().unwrapOrDefault();
 	if (type == "platformer") {
 		this->type = NLWRatingType::Platformer;
 	} else if (type == "pending") {
@@ -13,15 +13,15 @@ NLWRating::NLWRating(matjson::Value levelData) {
 	} else {
 		this->type = NLWRatingType::Regular;
 	}
-	this->tier = levelData["tier"].as_string();
-	this->id = levelData["id"].is_number() ? levelData["id"].as_int() : -1;
-	this->name = levelData["name"].is_string() ? levelData["name"].as_string() : "?";
-	this->creator = levelData["creator"].is_string() ? levelData["creator"].as_string() : "?";
-	this->skillset = levelData["skillset"].is_string() ? levelData["skillset"].as_string() : "";
-	this->enjoyment = levelData["enjoyment"].is_number() ? static_cast<float>(levelData["enjoyment"].as_double()) : -1.f; // unsure if the cast is necessary but better safe than sorry
-	this->description = levelData["description"].is_string() ? levelData["description"].as_string() : "";
-	if (levelData["broken"].is_string()) {
-		this->broken = levelData["broken"].as_string();
+	this->tier = levelData["tier"].asString().unwrapOrDefault();
+	this->id = levelData["id"].asInt().unwrapOr(-1);
+	this->name = levelData["name"].asString().unwrapOr("?");
+	this->creator = levelData["creator"].asString().unwrapOr("?");
+	this->skillset = levelData["skillset"].asString().unwrapOrDefault();
+	this->enjoyment = levelData["enjoyment"].asDouble().unwrapOr(-1.f);
+	this->description = levelData["description"].asString().unwrapOrDefault();
+	if (levelData["broken"].isString()) {
+		this->broken = levelData["broken"].asString().unwrap();
 	}
 }
 
