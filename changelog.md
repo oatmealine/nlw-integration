@@ -1,6 +1,14 @@
+## v1.4.0-beta.3
+
+Based on `oatmealine.nlw_integration` v1.4.0-beta.4:
+
+> **Experimental release**
+
+- Ported to 2.2074 and Geode 4.0.0
+
 ## v1.4.0-beta.2
 
-Based on `oatmealine.nlw_integration` v1.4.0-beta.1:
+Based on `oatmealine.nlw_integration` v1.4.0-beta.3:
 
 > **Experimental release**
 
