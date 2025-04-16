@@ -1,5 +1,3 @@
-// largely based on https://github.com/geode-sdk/geode/blob/241ddc317ac84d58ddadf3d26bb76fe159975ea8/loader/src/ui/nodes/MDTextArea.cpp
-
 #include <Geode/Geode.hpp>
 #include <Geode/binding/ProfilePage.hpp>
 #include <Geode/binding/CCContentLayer.hpp>
@@ -66,10 +64,10 @@ bool PlainTextArea::init(std::string const& str, CCSize const& requestedSize) {
     // clamp to at most 90% width, 80% height of the visible screen
     auto visible = CCDirector::sharedDirector()->getWinSize();
     auto maxSz  = CCSize{ visible.width * .9f, visible.height * .8f };
-    m_size = {
+    m_size = CCSize(
         std::min(requestedSize.width,  maxSz.width),
         std::min(requestedSize.height, maxSz.height)
-    };
+    );
 
     m_text = str;
     this->setContentSize(m_size);
