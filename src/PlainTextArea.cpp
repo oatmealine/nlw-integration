@@ -9,9 +9,9 @@
 #include <Geode/utils/web.hpp>
 #include <Geode/utils/ranges.hpp>
 #include <Geode/utils/string.hpp>
+#include <cocos2d.h>
 
 #include "PlainTextArea.hpp"
-#include <cocos2d.h>
 
 using namespace geode::prelude;
 using namespace cocos2d;
@@ -63,7 +63,8 @@ bool PlainTextArea::init(std::string const& str, CCSize const& requestedSize) {
     this->ignoreAnchorPointForPosition(false);
     this->setAnchorPoint({.5f, .5f});
 
-    auto visible = Director::getInstance()->getVisibleSize();
+    // clamp to at most 90% width, 80% height of the visible screen
+    auto visible = CCDirector::sharedDirector()->getWinSize();
     auto maxSz  = CCSize{ visible.width * .9f, visible.height * .8f };
     m_size = {
         std::min(requestedSize.width,  maxSz.width),
