@@ -6,7 +6,7 @@
 		"android": "2.2074",
 		"ios": "2.2074"
 	},
-	"version": "v1.4.0-beta.6",
+	"version": "v1.3.4",
 	"id": "oatmealine.nlw_integration",
 	"name": "NLW Integration",
 	"dependencies": [
