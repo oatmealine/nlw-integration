@@ -14,41 +14,40 @@
 using namespace geode::prelude;
 
 class $modify(NLWInfoLayer, LevelInfoLayer) {
-	struct Fields {
-		NLWRating m_rating;
-		CCMenu* m_menu = nullptr;
-		GJDifficultySprite* m_sprite = nullptr;
-		bool m_addedTier = false;
-	};
+    struct Fields {
+        NLWRating        m_rating;
+        CCMenu*          m_menu = nullptr;
+        GJDifficultySprite* m_sprite = nullptr;
+        bool             m_addedTier = false;
+    };
 
-	bool init(GJGameLevel* p0, bool p1) {
-		LevelInfoLayer::init(p0, p1);
+    bool init(GJGameLevel* p0, bool p1) {
+        LevelInfoLayer::init(p0, p1);
 
-		auto menu = CCMenu::create();
-		menu->setID("tier_menu"_spr);
+        auto menu = CCMenu::create();
+        menu->setID("tier_menu"_spr);
 
-		this->addChild(menu);
-		m_fields->m_menu = menu;
+        this->addChild(menu);
+        m_fields->m_menu = menu;
 
-		updateDifficultyFace();
+        updateDifficultyFace();
 
-		return true;
-	}
+        return true;
+    }
 
 	void updateDifficultyFace() {
 		if (!ListManager::fetchedRatings || ListManager::erroredRatings) return;
 		if (this->m_level->m_stars != 10) return;
 		if (this->m_level->m_demonDifficulty != 5) return; // INSANE demob
 
-		if (m_fields->m_menu == nullptr) return;
+        if (m_fields->m_menu == nullptr) return;
 
-		auto rating = ListManager::getRating(m_level);
-		if (!rating.has_value()) {
-			log::info("demon rating for {} not found", m_level->m_levelName);
-			return;
-		}
-		log::info("found demon rating for {} ({})", rating->name, rating->tier);
-		m_fields->m_rating = rating.value();
+        auto ratingOpt = ListManager::getRating(m_level);
+        if (!ratingOpt.has_value()) {
+            log::info("demon rating for {} not found", m_level->m_levelName);
+            return;
+        }
+        m_fields->m_rating = ratingOpt.value();
 
 		auto demon = m_difficultySprite;
 		if (demon == nullptr) {
