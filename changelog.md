@@ -1,3 +1,23 @@
+## v1.4.0-beta.6
+
+> **Experimental release**
+
+One day I'll actually bump the minor version. Not today
+
+- Rebuilt against Geode 4.4.0
+- Ported to iOS (thanks @daisuke1227!)
+- Fixed textbox alignment (also thanks @daisuke1227!)
+- Added Inexorable tier
+
+Consider the mod in a maintenance state from now on; I'll accept and work
+through incoming PRs but no new features will be added. Simply put: I'm
+overworked, buried in university schoolwork and an actual real life job and have
+lost much of my interest in playing GD.
+
+If someone else wants to take over maintaining the mod, that'd be much
+appreciated; though that will also involve maintaining the API. Please contact
+me if you're interested!
+
 ## v1.4.0-beta.5
 
 > **Experimental release**
