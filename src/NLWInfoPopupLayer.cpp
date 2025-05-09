@@ -43,12 +43,7 @@ bool NLWInfoPopupLayer::setup(GJGameLevel* level, NLWRating* rating) {
 	tierMenu->setPosition(ccp(385, 230) + offset);
 	m_mainLayer->addChild(tierMenu);
 
-	auto tier = CCLabelBMFont::create(
-		(rating->type == NLWRatingType::Pending
-			? rating->tier
-			: (rating->tier + " Tier")).c_str(),
-		"bigFont.fnt"
-	);
+	auto tier = CCLabelBMFont::create((rating->tier + " Tier").c_str(), "bigFont.fnt");
 	tier->setScale(0.75);
 	tier->setColor(ListManager::getTierColor(rating->tier));
 	tier->limitLabelWidth(180.f, 0.75f, 0.1f);
@@ -62,6 +57,12 @@ bool NLWInfoPopupLayer::setup(GJGameLevel* level, NLWRating* rating) {
 	tier->setScale(0.75);
 	tier->setColor(ListManager::getTierColor(rating->tier));
 	tier->limitLabelWidth(180.f, 0.75f, 0.1f);
+
+	auto skillset = CCLabelBMFont::create(rating->skillset.c_str(), "bigFont.fnt");
+	skillset->setPosition(ccp(385, 204) + offset);
+	skillset->setScale(0.5);
+	skillset->limitLabelWidth(180.f, 0.5f, 0.1f);
+	m_mainLayer->addChild(skillset);
 
 	CCSize const descSize {
 		m_size.width  - 40.f,
@@ -85,19 +86,6 @@ bool NLWInfoPopupLayer::setup(GJGameLevel* level, NLWRating* rating) {
 	);
 	openBtn->setPosition(m_size.width / 2.f, 25.f);
 	m_buttonMenu->addChild(openBtn);
-
-	auto const enjPos = ccp(name->getPositionX() + 10, name->getPositionY());
-
-	auto enjSprite = CCSprite::createWithSpriteFrameName("NLW_button_white.png"_spr);
-	enjSprite->setColor(ListManager::getEnjoymentColor(rating->enjoyment));
-	enjSprite->setPosition(enjPos);
-	enjSprite->setScale(0.5);
-	m_mainLayer->addChild(enjSprite);
-
-	auto enj = CCLabelBMFont::create(fmt::format("{:.0f}", rating->enjoyment).c_str(), "bigFont.fnt");
-	enj->setPosition(enjPos);
-	enj->setScale(0.415);
-	m_mainLayer->addChild(enj);
 
 	std::string brokenStr = rating->broken.value_or("unknown");
 	auto broken = CCLabelBMFont::create(fmt::format("Broken in 2.2: {}", brokenStr).c_str(), "goldFont.fnt");
