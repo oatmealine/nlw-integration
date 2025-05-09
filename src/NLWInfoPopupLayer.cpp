@@ -52,12 +52,6 @@ bool NLWInfoPopupLayer::setup(GJGameLevel* level, NLWRating* rating) {
 	);
 	tierMenu->addChild(tierMenuItem);
 
-	auto tier = CCLabelBMFont::create((rating->tier + " Tier").c_str(), "bigFont.fnt");
-	tier->setPosition(ccp(385, 230));
-	tier->setScale(0.75);
-	tier->setColor(ListManager::getTierColor(rating->tier));
-	tier->limitLabelWidth(180.f, 0.75f, 0.1f);
-
 	auto skillset = CCLabelBMFont::create(rating->skillset.c_str(), "bigFont.fnt");
 	skillset->setPosition(ccp(385, 204) + offset);
 	skillset->setScale(0.5);
