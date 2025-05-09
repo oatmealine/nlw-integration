@@ -42,12 +42,12 @@ class $modify(NLWInfoLayer, LevelInfoLayer) {
 
 		if (m_fields->m_menu == nullptr) return;
 
-		auto ratingOpt = ListManager::getRating(m_level);
-		if (!ratingOpt.has_value()) {
+		auto rating = ListManager::getRating(m_level);
+		if (!rating.has_value()) {
 			log::info("demon rating for {} not found", m_level->m_levelName);
 			return;
 		}
-		m_fields->m_rating = ratingOpt.value();
+		m_fields->m_rating = rating.value();
 
 		auto demon = m_difficultySprite;
 		if (demon == nullptr) {
