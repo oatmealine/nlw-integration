@@ -116,17 +116,17 @@ std::optional<NLWRating> ListManager::getRating(GJGameLevel* level) {
 
 cocos2d::ccColor3B ListManager::getTierColor(std::string tier) {
 	// regular tiers
-	if (tier == "Fuck")        return cocos2d::ccColor3B(0,   0,   0  );
-	if (tier == "Beginner")    return cocos2d::ccColor3B(58,  134, 228);
-	if (tier == "Easy")        return cocos2d::ccColor3B(0,   255, 254);
-	if (tier == "Medium")      return cocos2d::ccColor3B(0,   255, 55 );
-	if (tier == "Hard")        return cocos2d::ccColor3B(255, 255, 63 );
-	if (tier == "Very Hard")   return cocos2d::ccColor3B(255, 153, 43 );
-	if (tier == "Insane")      return cocos2d::ccColor3B(255, 3,   28 );
-	if (tier == "Extreme")     return cocos2d::ccColor3B(255, 12,  251);
-	if (tier == "Remorseless") return cocos2d::ccColor3B(157, 10,  250);
-	if (tier == "Relentless")  return cocos2d::ccColor3B(178, 135, 232);
-	if (tier == "Terrifying")  return cocos2d::ccColor3B(204, 204, 204);
+	if (tier == "Fuck")        return cocos2d::ccColor3B{0,   0,   0  };
+	if (tier == "Beginner")    return cocos2d::ccColor3B{58,  134, 228};
+	if (tier == "Easy")        return cocos2d::ccColor3B{0,   255, 254};
+	if (tier == "Medium")      return cocos2d::ccColor3B{0,   255, 55 };
+	if (tier == "Hard")        return cocos2d::ccColor3B{255, 255, 63 };
+	if (tier == "Very Hard")   return cocos2d::ccColor3B{255, 153, 43 };
+	if (tier == "Insane")      return cocos2d::ccColor3B{255, 3,   28 };
+	if (tier == "Extreme")     return cocos2d::ccColor3B{255, 12,  251};
+	if (tier == "Remorseless") return cocos2d::ccColor3B{157, 10,  250};
+	if (tier == "Relentless")  return cocos2d::ccColor3B{178, 135, 232};
+	if (tier == "Terrifying")  return cocos2d::ccColor3B{204, 204, 204};
 
 	// pending
 	if (tier == "Low End")            return cocos2d::ccColor3B{0,   192, 237};
