@@ -134,6 +134,7 @@ cocos2d::ccColor3B ListManager::getTierColor(std::string tier) {
 	if (tier == "Relentless")    return cocos2d::ccColor3B{178, 135, 232};
 	if (tier == "Terrifying")    return cocos2d::ccColor3B{241, 158, 234};
 	if (tier == "Catastrophic")  return cocos2d::ccColor3B{234, 102, 97 };
+	if (tier == "Inexorable")    return cocos2d::ccColor3B{255, 193, 131};
 	if (tier == "Super Fucking Terrifying") return cocos2d::ccColor3B{0, 0, 0};
 
 	// pending
